@@ -35,8 +35,8 @@ class MQ135(object):
     ATMOCO2 = 397.13
 
 
-    def __init__(self, pin):
-        self.pin = pin
+    def __init__(self, adc):
+        self.adc = adc
 
     def get_correction_factor(self, temperature, humidity):
         """Calculates the correction factor for ambient air temperature and relative humidity
@@ -53,8 +53,7 @@ class MQ135(object):
 
     def get_resistance(self):
         """Returns the resistance of the sensor in kOhms // -1 if not value got in pin"""
-        adc = ADC(self.pin)
-        value = adc.read()
+        value = self.adc.read()
         if value == 0:
             return -1
 
